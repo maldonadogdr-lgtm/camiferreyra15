@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XV de Cami • TakeStyle</title>
+  <meta name="description" content="Invitación digital - XV de Cami" />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <style>
+    :root{
+      --bg0:#05050a; --bg1:#0b0b12;
+      --text:#f4f4f7; --muted: rgba(244,244,247,.72);
+      --line: rgba(255,255,255,.14);
+      --silver1:#ffffff; --silver2:#cfd6df; --silver3:#93a1b3;
+      --shadow: 0 22px 90px rgba(0,0,0,.60);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 18% 8%, rgba(200,210,230,.22), transparent 55%),
+        radial-gradient(900px 700px at 80% 28%, rgba(255,255,255,.12), transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, rgba(140,160,190,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 60%, var(--bg0));
+      min-height:100vh;
+    }
+    .wrap{max-width:1020px;margin:0 auto;padding:22px}
+    .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:8px}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;
+      border:1px solid var(--line);background: rgba(0,0,0,.25);
+      border-radius:999px;backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      font-size:13px;color:var(--muted);letter-spacing:.2px;
+    }
+    .dot{width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--silver1), var(--silver3));
+      box-shadow: 0 0 18px rgba(233,238,246,.45);
+    }
+
+    .hero{
+      margin-top:18px;border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 10px);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;position:relative;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:-2px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.26), transparent 34%),
+        linear-gradient(225deg, rgba(184,194,204,.20), transparent 45%),
+        radial-gradient(700px 220px at 60% 0%, rgba(255,255,255,.18), transparent 62%);
+      pointer-events:none;
+    }
+    .inner{position:relative;padding:34px 22px 22px}
+
+    .kicker{
+      text-transform:uppercase;letter-spacing:.28em;font-size:12px;
+      color:rgba(244,244,247,.78);
+      display:flex;align-items:center;gap:10px;justify-content:center;margin-top:6px;
+    }
+    .kline{height:1px;width:44px;background:linear-gradient(90deg, transparent, rgba(244,244,247,.55), transparent)}
+    .title{
+      font-size: clamp(44px, 7.5vw, 82px);
+      line-height:1;text-align:center;margin:12px 0 6px;
+      font-weight:900;letter-spacing:-.02em;
+      background: linear-gradient(180deg, var(--silver1), var(--silver2) 55%, rgba(244,244,247,.75));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow: 0 18px 44px rgba(0,0,0,.45);
+    }
+    .subtitle{
+      text-align:center;margin:0 auto;max-width:740px;
+      color:var(--muted);font-size:15.5px;line-height:1.65;padding:0 10px;
+    }
+
+    .grid{
+      display:grid;grid-template-columns: 1.15fr .85fr;
+      gap:14px;margin-top:18px;padding:0 14px 18px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.26);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 50px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .cardHeader{
+      padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .cardTitle{font-weight:900;letter-spacing:.2px}
+    .chip{
+      font-size:12px;color:rgba(244,244,247,.78);
+      border:1px solid rgba(255,255,255,.14);
+      padding:6px 10px;border-radius:999px;background: rgba(255,255,255,.05);
+      white-space:nowrap;
+    }
+    .body{padding:14px 16px 16px;color:var(--muted)}
+    .row{
+      display:grid;grid-template-columns: 140px 1fr;
+      gap:10px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12);
+    }
+    .row:last-child{border-bottom:none}
+    .label{color:rgba(244,244,247,.88);font-weight:900}
+    .value strong{color:rgba(244,244,247,.92)}
+
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{
+      appearance:none;border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color:rgba(244,244,247,.92);
+      padding:12px 14px;border-radius: 14px;
+      font-weight:900;cursor:pointer;text-decoration:none;
+      display:inline-flex;align-items:center;gap:10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.26)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(184,194,204,.10));
+      border-color: rgba(255,255,255,.28);
+    }
+
+    /* Countdown */
+    .countWrap{margin-top:14px}
+    .countGrid{display:grid;grid-template-columns: repeat(4, minmax(80px,1fr));gap:10px}
+    @media (max-width: 420px){ .countGrid{grid-template-columns: repeat(2,1fr)} }
+    .flip{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius:16px;padding:12px 10px;text-align:center;overflow:hidden;
+    }
+    .num{
+      font-size:30px;font-weight:950;letter-spacing:-.02em;
+      color:rgba(244,244,247,.95);display:block;
+      transform: translateY(0);transition: transform .22s ease;
+    }
+    .flip.anim .num{ transform: translateY(-6px); }
+    .lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,244,247,.70);margin-top:6px;display:block}
+
+    /* Gifts */
+    .giftText{white-space:pre-line;line-height:1.65;color:rgba(244,244,247,.78);font-size:14px}
+    .copyBox{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);color:rgba(244,244,247,.92);
+      font-weight:950;letter-spacing:.2px;margin-top:10px;
+    }
+
+    /* Map */
+    .mapWrap{border-top:1px solid rgba(255,255,255,.10);background: rgba(255,255,255,.03)}
+    iframe{width:100%;height:320px;border:0;display:block}
+
+    /* Music bar (sin tip) */
+    .musicBar{
+      margin-top:14px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      border-radius:16px;
+      padding:12px;
+    }
+    .musicLeft{display:flex;flex-direction:column;gap:2px;text-align:left}
+    .musicTitle{font-weight:950;color:rgba(244,244,247,.92)}
+    .musicSub{font-size:12.5px;color:rgba(244,244,247,.70)}
+
+    .foot{text-align:center;color:rgba(244,244,247,.55);font-size:12px;padding:18px 0 10px}
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background: rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);
+      color:rgba(244,244,247,.92);padding:10px 14px;border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      opacity:0;pointer-events:none;transition: opacity .2s ease, transform .2s ease;
+      backdrop-filter: blur(10px);font-weight:950;font-size:13px;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-4px)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="pill"><span class="dot"></span> Invitación digital · XV</div>
+      <div class="pill">Tema: <strong style="color:rgba(244,244,247,.92)">Rihanna – Diamonds</strong></div>
+    </div>
+
+    <section class="hero">
+      <div class="inner">
+        <div class="kicker"><span class="kline"></span> MIS XV <span class="kline"></span></div>
+        <h1 class="title">Cami</h1>
+        <p class="subtitle">
+          Te invito a compartir una noche inolvidable ✨<br/>
+          <strong>¡No faltes!</strong>
+        </p>
+
+        <div class="grid">
+          <!-- DETALLES -->
+          <div class="card">
+            <div class="cardHeader">
+              <div class="cardTitle">Detalles</div>
+              <div class="chip" id="prettyDate">—</div>
+            </div>
+
+            <div class="body">
+              <div class="row">
+                <div class="label">Salón</div>
+                <div class="value"><strong>Clahe Eventos – Bernal</strong></div>
+              </div>
+              <div class="row">
+                <div class="label">Fecha</div>
+                <div class="value"><strong>Viernes 20/02/2026</strong></div>
+              </div>
+              <div class="row">
+                <div class="label">Horario</div>
+                <div class="value"><strong>22:00</strong> <span style="opacity:.75">a</span> <strong>05:00</strong></div>
+              </div>
+              <div class="row">
+                <div class="label">Dirección</div>
+                <div class="value"><strong>Yapeyú 479</strong><br/>Bernal, Buenos Aires</div>
+              </div>
+              <div class="row">
+                <div class="label">Dress code</div>
+                <div class="value"><strong>Elegante</strong></div>
+              </div>
+
+              <div class="countWrap">
+                <div class="countGrid">
+                  <div class="flip" id="boxD"><span class="num" id="d">0</span><span class="lab">Días</span></div>
+                  <div class="flip" id="boxH"><span class="num" id="h">00</span><span class="lab">Horas</span></div>
+                  <div class="flip" id="boxM"><span class="num" id="m">00</span><span class="lab">Min</span></div>
+                  <div class="flip" id="boxS"><span class="num" id="s">00</span><span class="lab">Seg</span></div>
+                </div>
+              </div>
+
+              <div class="actions">
+                <a class="btn primary" id="btnCalendar" href="#" target="_blank" rel="noopener">Agendar</a>
+                <a class="btn" href="https://www.google.com/maps?q=Yapey%C3%BA%20479%2C%20Bernal%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
+                <a class="btn" href="https://wa.me/5491159595434?text=Hola!%20Confirmo%20asistencia%20a%20los%20XV%20de%20Cami%20%E2%9C%A8" target="_blank" rel="noopener">Confirmar</a>
+              </div>
+
+              <div class="musicBar">
+                <div class="musicLeft">
+                  <div class="musicTitle">Diamonds</div>
+                  <div class="musicSub">Rihanna</div>
+                </div>
+                <button class="btn primary" id="musicBtn" type="button">Pausar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- REGALOS + MAPA -->
+          <div class="card">
+            <div class="cardHeader">
+              <div class="cardTitle">Regalos</div>
+              <div class="chip">Alias</div>
+            </div>
+
+            <div class="body">
+              <div class="giftText">
+El regalo más valioso para mi es poder compartir esta noche con vos, celebrando mis 15 años.
+
+Tu compañía será siempre lo más importante, pero si deseas acompañarme con un regalo,
+
+será bienvenido de la forma que elijas.
+
+Para quienes deseen la opción digital:
+              </div>
+
+              <div class="copyBox">
+                <span id="aliasTxt">camiiferreyraa.mp</span>
+                <button class="btn" style="padding:10px 12px" id="btnCopy" type="button">Copiar</button>
+              </div>
+            </div>
+
+            <div class="mapWrap">
+              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Yapey%C3%BA%20479%2C%20Bernal%2C%20Buenos%20Aires&output=embed"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="foot">Hecho con ❤️ para los XV de Cami · <span id="yearNow"></span></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">Copiado ✅</div>
+
+  <!-- ✅ SUBÍ diamonds.mp3 al repo (misma carpeta) -->
+  <audio id="bgm" preload="auto" autoplay muted loop playsinline></audio>
+
+  <script>
+    const EVENT_START = new Date("2026-02-20T22:00:00");
+    const EVENT_END   = new Date("2026-02-21T05:00:00");
+    const LOCATION_TXT = "Clahe Eventos, Yapeyú 479, Bernal, Buenos Aires";
+
+    // Fecha bonita (para chip)
+    try{
+      document.getElementById("prettyDate").textContent =
+        new Intl.DateTimeFormat("es-AR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"}).format(EVENT_START);
+    }catch(e){
+      document.getElementById("prettyDate").textContent = "20/02/2026";
+    }
+
+    // Calendar (UTC)
+    function pad(n){return String(n).padStart(2,"0")}
+    function toUTC(d){
+      return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+"T"+
+             pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+"Z";
+    }
+    document.getElementById("btnCalendar").href =
+      "https://calendar.google.com/calendar/render?action=TEMPLATE"
+      + "&text=" + encodeURIComponent("XV de Cami")
+      + "&dates=" + toUTC(EVENT_START) + "/" + toUTC(EVENT_END)
+      + "&details=" + encodeURIComponent("¡Te espero para celebrar mis XV! (Dress code: Elegante)")
+      + "&location=" + encodeURIComponent(LOCATION_TXT);
+
+    // Copy alias
+    const toast = document.getElementById("toast");
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      const alias = document.getElementById("aliasTxt").textContent.trim();
+      try{
+        await navigator.clipboard.writeText(alias);
+        toast.classList.add("show");
+        setTimeout(()=>toast.classList.remove("show"), 1200);
+      }catch(e){
+        prompt("Copiá el alias:", alias);
+      }
+    });
+
+    // Year
+    document.getElementById("yearNow").textContent = new Date().getFullYear();
+
+    // Countdown flip
+    const elD = document.getElementById("d"), elH = document.getElementById("h"),
+          elM = document.getElementById("m"), elS = document.getElementById("s");
+    const boxD = document.getElementById("boxD"), boxH = document.getElementById("boxH"),
+          boxM = document.getElementById("boxM"), boxS = document.getElementById("boxS");
+    let prev = {d:null,h:null,m:null,s:null};
+    function bump(box){
+      box.classList.remove("anim");
+      void box.offsetWidth;
+      box.classList.add("anim");
+      setTimeout(()=>box.classList.remove("anim"), 220);
+    }
+    function tick(){
+      const now = new Date();
+      let diff = EVENT_START - now;
+      if(diff < 0) diff = 0;
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff / (1000*60*60)) % 24);
+      const m = Math.floor((diff / (1000*60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      if(prev.d !== d){ elD.textContent = d; bump(boxD); prev.d = d; }
+      if(prev.h !== h){ elH.textContent = pad(h); bump(boxH); prev.h = h; }
+      if(prev.m !== m){ elM.textContent = pad(m); bump(boxM); prev.m = m; }
+      if(prev.s !== s){ elS.textContent = pad(s); bump(boxS); prev.s = s; }
+    }
+    tick(); setInterval(tick, 1000);
+
+    // MUSIC (sin tip, sin mensajes)
+    const START_AT_SECONDS = 55; // ajustá el corte (sin intro)
+    const audio = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    audio.src = "diamonds.mp3?v=1";
+    audio.muted = true;
+    audio.loop = true;
+    audio.play().catch(()=>{});
+
+    function unlock(){
+      audio.muted = false;
+      try{ audio.currentTime = START_AT_SECONDS }catch(e){}
+      audio.play().catch(()=>{});
+      document.removeEventListener("click", unlock);
+      document.removeEventListener("touchstart", unlock);
+    }
+    document.addEventListener("click", unlock, {passive:true});
+    document.addEventListener("touchstart", unlock, {passive:true});
+
+    musicBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.muted = false;
+        try{ audio.currentTime = START_AT_SECONDS }catch(e){}
+        audio.play().catch(()=>{});
+        musicBtn.textContent = "Pausar";
+      } else {
+        audio.pause();
+        musicBtn.textContent = "Reproducir";
+      }
+    });
+  </script>
+</body>
+</html>
